@@ -3,180 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>MasterSolis InfoTech Services</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f5f5f5;
+        .services-section {
+            padding: 4rem 2rem;
+            background-color: #e0f5f1;
         }
 
-        .signup-container {
-            display: flex;
-            max-width: 1000px;
-            width: 100%;
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: #2c7a7b;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
             background: white;
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color: #e0f5f1;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-title {
+            color: #2c7a7b;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .learn-more {
+            display: inline-block;
+            color: #2c7a7b;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 0;
             position: relative;
         }
 
-        .close-button {
+        .learn-more::after {
+            content: '';
             position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #333;
-            background: none;
-            border: none;
-            z-index: 10;
-        }
-
-        .image-section {
-            flex: 1;
-            min-height: 600px;
-            background-image: url('/placeholder.svg?height=600&width=500');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .form-section {
-            flex: 1;
-            padding: 40px;
-            background: white;
-        }
-
-        .form-title {
-            font-size: 32px;
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .form-group input {
             width: 100%;
-            padding: 10px 0;
-            border: none;
-            border-bottom: 1px solid #ddd;
-            outline: none;
-            transition: border-color 0.3s;
-            font-size: 16px;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #2c7a7b;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
-        .form-group input:focus {
-            border-bottom-color: #ff7f50;
-        }
-
-        .checkbox-group {
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-
-        .checkbox-group label {
-            font-size: 14px;
-            color: #666;
-            cursor: pointer;
-        }
-
-        .register-button {
-            width: 100%;
-            padding: 15px;
-            background-color: #ff7f50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .register-button:hover {
-            background-color: #ff6b3d;
+        .learn-more:hover::after {
+            transform: scaleX(1);
         }
 
         @media (max-width: 768px) {
-            .signup-container {
-                flex-direction: column;
-                margin: 20px;
+            .section-title {
+                font-size: 2rem;
             }
-
-            .image-section {
-                min-height: 200px;
-            }
-
-            .form-section {
-                padding: 20px;
+            
+            .services-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="signup-container">
-        <button class="close-button">×</button>
-        <div class="image-section"></div>
-        <div class="form-section">
-            <h1 class="form-title">Sign Up</h1>
-            <form>
-                <div class="form-group">
-                    <label for="firstname">First name</label>
-                    <input type="text" id="firstname" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Last name</label>
-                    <input type="text" id="lastname" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="mobile">Mobile Number</label>
-                    <input type="tel" id="mobile" required>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="code-conduct" required>
-                    <label for="code-conduct">I agree to the code of conduct</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="join-community">
-                    <label for="join-community">Join the community</label>
-                </div>
-                <button type="submit" class="register-button">Register</button>
-            </form>
+    <section class="services-section">
+        <div class="section-header">
+            <h2 class="section-title">Our Services</h2>
         </div>
-    </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon-placeholder">
+                    <!-- Cloud icon will go here -->
+                </div>
+                <h3 class="service-title">Cloud Solutions</h3>
+                <p class="service-description">We offer cloud storage solutions that are designed to meet your specific needs. With our state-of-the-art technology, you can rest assured that your data is safe and easily accessible.</p>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-placeholder">
+                    <!-- IT Services icon will go here -->
+                </div>
+                <h3 class="service-title">IT Services</h3>
+                <p class="service-description">Our proficient cutting-edge technology allows us to provide the most efficient services available, while our team of experienced professionals brings a wealth of knowledge and expertise to every project.</p>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-placeholder">
+                    <!-- Web Dev icon will go here -->
+                </div>
+                <h3 class="service-title">Web Development</h3>
+                <p class="service-description">We specialize in creating responsive designs that are fully customizable to your unique business needs. Our team prioritizes a user-friendly interface for optimal customer engagement.</p>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-placeholder">
+                    <!-- Training icon will go here -->
+                </div>
+                <h3 class="service-title">Full Stack Training</h3>
+                <p class="service-description">Our full stack training program offers expert training, giving you all the tools you need to become a successful developer. We provide a comprehensive curriculum that covers everything you need to know.</p>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-placeholder">
+                    <!-- Projects icon will go here -->
+                </div>
+                <h3 class="service-title">Projects</h3>
+                <p class="service-description">Looking for a team that can take on your final year project with confidence? Our IT startup specializes in providing innovative solutions that will help take your project to a whole new level.</p>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-placeholder">
+                    <!-- Internship icon will go here -->
+                </div>
+                <h3 class="service-title">Internships</h3>
+                <p class="service-description">Our comprehensive internship program offers hands-on experience in the fast-paced world of technology. At our IT startup, we provide a supportive and stimulating environment where you'll thrive and grow.</p>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
