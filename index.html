@@ -3,38 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .underline {
+            height: 1px;
+            background-color: #444;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        input, textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .privacy-note {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-<body style="background-color: black;">
-    <!-- Previous HTML remains the same until the hero section -->
-
-    <!-- Modal Section -->
-    <div class="modal">
-        <button class="close-btn">&times;</button>
-        <div class="modal-content">
-            <h2>EXPERIENCE DIGITAL EXCELLENCE</h2>
-            <h3>GO-TO IT consulting partner</h3>
-            
-            <div class="modal-form">
-                <div class="form-section">
-                    <input type="text" placeholder="Name" class="modal-input">
-                    <input type="email" placeholder="Email" class="modal-input">
-                    <button class="register-btn">
-                        REGISTER NOW TO<br>
-                        UNLOCK YOUR POTENTIAL
-                    </button>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <div class="underline"></div>
+        <form>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstname">First name</label>
+                    <input type="text" id="firstname" placeholder="First name">
                 </div>
-                <div class="image-section">
-                    <!-- Placeholder for your image -->
+                <div class="form-group">
+                    <label for="lastname">Last name</label>
+                    <input type="text" id="lastname" placeholder="Last name">
                 </div>
             </div>
-            
-            <p class="modal-footer">
-                Elevate Your Skills with MasterSolis InfoTech's courses
-            </p>
-        </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <p class="privacy-note">We'll never share your email with anyone else.</p>
+            </div>
+            <div class="form-group">
+                <label for="review">Review</label>
+                <textarea id="review" placeholder="Enter your message"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
     </div>
-
 </body>
 </html>
