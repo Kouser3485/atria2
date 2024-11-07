@@ -1,168 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Interface</title>
+    <title>Shopping Cart with Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <style>
-        * {
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e0e0e0;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            color: #333;
         }
 
-        .chat-container {
-            width: 360px;
-            height: 600px;
-            border: 1px solid #ccc;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             display: flex;
             flex-direction: column;
-            background-color: #fff;
-        }
-
-        .chat-header {
-            background-color: #1a237e;
-            color: white;
-            padding: 15px;
-            position: relative;
-        }
-
-        .header-title {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .status {
-            font-size: 14px;
-            display: flex;
             align-items: center;
-            gap: 5px;
-        }
-
-        .status::before {
-            content: "";
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: #4CAF50;
-            border-radius: 50%;
-        }
-
-        .close-button {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            color: white;
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        .company-name {
-            padding: 15px;
-            color: #333;
-            border-bottom: 1px solid #eee;
-        }
-
-        .faq-container {
-            padding: 15px;
-            overflow-y: auto;
-            flex-grow: 1;
-        }
-
-        .faq-item {
-            border: 1px solid #ff0000;
-            border-radius: 4px;
-            padding: 12px;
-            margin-bottom: 10px;
-            color: #ff0000;
-            cursor: pointer;
-            font-size: 14px;
             text-align: center;
+            padding: 20px;
         }
 
-        .faq-answer {
-            background-color: #f0f0f0;
-            border-radius: 4px;
-            padding: 12px;
-            margin-bottom: 10px;
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-card .info h3 {
+            font-size: 22px;
+            margin: 0;
+            color: #007bff;
+        }
+
+        .product-card .info p {
+            font-size: 15px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .product-card .info .details {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
             font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .product-card .info .price {
+            color: #ff6f61;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        .product-card .info .add-to-cart-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .product-card .info .add-to-cart-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 350px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 30px 20px;
+            overflow-y: auto;
+            font-size: 16px;
+        }
+
+        .cart-sidebar.open {
+            transform: translateX(0);
+        }
+
+        .cart-sidebar .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #ff6f61;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .cart-sidebar .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .cart-sidebar .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-sidebar .cart-item .cart-item-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .cart-sidebar .cart-item .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .cart-sidebar .cart-item .item-info h3 {
+            margin: 0;
+            font-size: 18px;
             color: #333;
         }
 
-        .chat-input {
-            border-top: 1px solid #eee;
+        .cart-sidebar .cart-item .item-info .price {
+            color: #ff6f61;
+            font-size: 16px;
+        }
+
+        .cart-sidebar .checkout-btn {
+            width: 100%;
             padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .message-input {
-            flex-grow: 1;
+            background-color: #1a1a1a;
+            color: white;
             border: none;
-            outline: none;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .input-icons {
-            display: flex;
-            gap: 10px;
-            color: #666;
-        }
-
-        .input-icons span {
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .cart-sidebar .checkout-btn:hover {
+            background-color: #ff6f61;
         }
     </style>
 </head>
+
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <div class="header-title">ITG</div>
-            <div class="status">We'll reply as soon as we can</div>
-            <span class="close-button">×</span>
-        </div>
-        
-        <div class="company-name">
-            MasterSolis InfoTech
-        </div>
+    <header class="header">
+    </header>
 
-        <div class="faq-container">
-            <div class="faq-item">
-                How can in Enroll into courses or internships
-            </div>
-            <div class="faq-item">
-                How do I add a new question & answer?
-            </div>
-            <div class="faq-item">
-                How do I edit or remove the Frequently Asked Questions title?
-            </div>
-            <div class="faq-answer">
-                To edit the 'Frequently Asked Questions' title:
-                1. Go to the FAQ 'Settings' tab in the Editor.
-                2. Look for the title field and make your changes.
-
-                To remove the title from your mobile app:
-                1. Open the Owner's app on your mobile device.
-                2. Navigate to the 'Site & App' tab.
-                3. Find the option to hide or remove the FAQ title.
-
-                Note: The exact steps may vary depending on your specific app version.
-            </div>
-            <div class="faq-item">
-                Can I insert an image, video, or GIF in my FAQ?
-            </div>
+    <main class="main-content container">
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be loaded here -->
         </div>
+    </main>
 
-        <div class="chat-input">
-            <input type="text" class="message-input" placeholder="Type your message...">
-            <div class="input-icons">
-                <span>😊</span>
-                <span>📎</span>
-            </div>
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <h2>Your Cart</h2>
+        <button class="close-btn" id="close-cart">&times;</button>
+        <div id="cart-items-container">
+            <!-- Cart items will be loaded here -->
         </div>
-    </div>
+        <button class="checkout-btn" id="checkout-btn">Checkout</button>
+    </aside>
+
+    <script>
+        const products = [
+            { id: 1, name: 'DSA Using Python', price: 279.99, duration: '4 weeks', image: 'https://courses.wscubetech.com/s/store/courses/612c9e860cf2b183bad3c610/cover.jpg?v=5' },
+            { id: 2, name: 'React js with Projects', price: 49.99, duration: '6 weeks', image: 'https://admin.mridul.tech/wp-content/uploads/2023/02/React-Project-Ideas.jpg' },
+            { id: 3, name: 'Front End - HTML, CSS, JS', price: 39.99, duration: '5 weeks', image: 'https://cdn.kwork.com/pics/t3/55/32195796-6622c7ff2f0c2.jpg' },
+            { id: 4, name: 'Backend Python Django', price: 499.99, duration: '8 weeks', image: 'https://blueshelltech.com/media/2021/05/python-django-1024x576.jpg' },
+            { id: 5, name: 'Python Basics', price: 24.99, duration: '2 weeks', image: 'https://i.ytimg.com/vi/fLAfa-BQtOQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCijxDCPY54AmRDRCND6DK71Gm58Q' },
+            { id: 6, name: 'Full Stack Development', price: 14.99, duration: '10 weeks', image: 'https://jaro-website.s3.ap-south-1.amazonaws.com/2024/04/0-cl7fc6pt1MHjIF4K.png' },
+            { id: 7, name: 'Advanced Data Analytics', price: 14.99, duration: '12 weeks', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj-h4tm2Vva7TjrEZkYAPAQD1drOjSfkwzbA&s' },
+            { id: 8, name: 'Data Science Fundamentals', price: 14.99, duration: '8 weeks', image: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_Data_Science.jpg' },
+        ];
+
+        const cart = [];
+        const productGrid = document.getElementById('product-grid');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCartButton = document.getElementById('close-cart');
+        const checkoutButton = document.getElementById('checkout-btn');
+
+        function renderProducts() {
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="info">
+                        <h3>${product.name}</h3>
+                        <p>Duration: ${product.duration}</p>
+                        <div class="details">
+                            <span>Price: $${product.price}</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                `;
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) cart.push(product);
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            cartItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <div class="cart-item-inner">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="item-info">
+                            <h3>${item.name}</h3>
+                            <p class="price">$${item.price}</p>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+        }
+
+        function toggleCart() {
+            cartSidebar.classList.toggle('open');
+        }
+
+        closeCartButton.addEventListener('click', toggleCart);
+        checkoutButton.addEventListener('click', () => alert('Proceeding to Checkout'));
+
+        renderProducts();
+    </script>
 </body>
+
 </html>
