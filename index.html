@@ -3,113 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Chat Interface</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        .container {
-            width: 100%;
-            max-width: 500px;
-        }
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        .underline {
-            height: 1px;
-            background-color: #444;
-            margin-bottom: 30px;
-        }
-        form {
+
+        .chat-container {
+            width: 360px;
+            height: 600px;
+            border: 1px solid #ccc;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            background-color: #fff;
         }
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-        .form-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-        }
-        input, textarea {
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        .privacy-note {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 5px;
-        }
-        textarea {
-            height: 100px;
-            resize: vertical;
-        }
-        button {
-            background-color: #007bff;
+
+        .chat-header {
+            background-color: #1a237e;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 4px;
+            padding: 15px;
+            position: relative;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .status {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+        }
+
+        .close-button {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            color: white;
             cursor: pointer;
-            align-self: flex-start;
+            font-size: 20px;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        .company-name {
+            padding: 15px;
+            color: #333;
+            border-bottom: 1px solid #eee;
         }
-        @media (max-width: 600px) {
-            .form-row {
-                flex-direction: column;
-            }
+
+        .faq-container {
+            padding: 15px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .faq-item {
+            border: 1px solid #ff0000;
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 10px;
+            color: #ff0000;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .chat-input {
+            border-top: 1px solid #eee;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .input-icons {
+            display: flex;
+            gap: 10px;
+            color: #666;
+        }
+
+        .input-icons span {
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Contact Us</h1>
-        <div class="underline"></div>
-        <form>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="firstname">First name</label>
-                    <input type="text" id="firstname" placeholder="First name">
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Last name</label>
-                    <input type="text" id="lastname" placeholder="Last name">
-                </div>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="header-title">ITG</div>
+            <div class="status">We'll reply as soon as we can</div>
+            <span class="close-button">×</span>
+        </div>
+        
+        <div class="company-name">
+            MasterSolis InfoTech
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                How can in Enroll into courses or internships
             </div>
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" id="email" placeholder="Enter your email">
-                <p class="privacy-note">We'll never share your email with anyone else.</p>
+            <div class="faq-item">
+                How do I add a new question & answer?
             </div>
-            <div class="form-group">
-                <label for="review">Review</label>
-                <textarea id="review" placeholder="Enter your message"></textarea>
+            <div class="faq-item">
+                How do I edit or remove the Frequently Asked Questions title?
             </div>
-            <button type="submit">Submit</button>
-        </form>
+            <div class="faq-item">
+                Can I insert an image, video, or GIF in my FAQ?
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" class="message-input" placeholder="Type your message...">
+            <div class="input-icons">
+                <span>😊</span>
+                <span>📎</span>
+            </div>
+        </div>
     </div>
 </body>
 </html>
