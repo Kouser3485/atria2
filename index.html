@@ -1,286 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart with Search</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <title>Sign Up</title>
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #e0e0e0;
+        * {
             margin: 0;
             padding: 0;
-            color: #333;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .product-card {
-            background-color: #f8f9fa;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        body {
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 20px;
+            background-color: #f5f5f5;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .product-card .info h3 {
-            font-size: 22px;
-            margin: 0;
-            color: #007bff;
-        }
-
-        .product-card .info p {
-            font-size: 15px;
-            color: #666;
-            margin: 10px 0;
-        }
-
-        .product-card .info .details {
+        .signup-container {
             display: flex;
-            justify-content: space-between;
+            max-width: 1000px;
             width: 100%;
-            font-size: 14px;
-            color: #555;
-            margin-top: 10px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
-        .product-card .info .price {
-            color: #ff6f61;
-            font-size: 18px;
-            margin-top: 15px;
-        }
-
-        .product-card .info .add-to-cart-btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 20px;
+        .close-button {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 15px;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .product-card .info .add-to-cart-btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Cart Sidebar */
-        .cart-sidebar {
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 350px;
-            height: 100%;
-            background-color: white;
-            box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 1000;
-            padding: 30px 20px;
-            overflow-y: auto;
-            font-size: 16px;
-        }
-
-        .cart-sidebar.open {
-            transform: translateX(0);
-        }
-
-        .cart-sidebar .close-btn {
+            color: #333;
             background: none;
             border: none;
-            font-size: 24px;
-            color: #ff6f61;
-            cursor: pointer;
+            z-index: 10;
+        }
+
+        .image-section {
+            flex: 1;
+            min-height: 600px;
+            background-image: url('/placeholder.svg?height=600&width=500');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .form-section {
+            flex: 1;
+            padding: 40px;
+            background: white;
+        }
+
+        .form-title {
+            font-size: 32px;
+            color: #333;
             margin-bottom: 30px;
         }
 
-        .cart-sidebar .cart-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .form-group {
             margin-bottom: 20px;
-            border-bottom: 1px solid #f0f0f0;
-            padding-bottom: 10px;
         }
 
-        .cart-sidebar .cart-item:last-child {
-            border-bottom: none;
-        }
-
-        .cart-sidebar .cart-item .cart-item-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .cart-sidebar .cart-item .cart-item-image {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-right: 15px;
-        }
-
-        .cart-sidebar .cart-item .item-info h3 {
-            margin: 0;
-            font-size: 18px;
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             color: #333;
+            font-size: 14px;
         }
 
-        .cart-sidebar .cart-item .item-info .price {
-            color: #ff6f61;
+        .form-group input {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            outline: none;
+            transition: border-color 0.3s;
             font-size: 16px;
         }
 
-        .cart-sidebar .checkout-btn {
+        .form-group input:focus {
+            border-bottom-color: #ff7f50;
+        }
+
+        .checkbox-group {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .register-button {
             width: 100%;
             padding: 15px;
-            background-color: #1a1a1a;
+            background-color: #ff7f50;
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
-            font-size: 18px;
-            margin-top: 20px;
-            transition: background-color 0.3s ease-in-out;
+            transition: background-color 0.3s;
         }
-        .cart-sidebar .checkout-btn:hover {
-            background-color: #ff6f61;
+
+        .register-button:hover {
+            background-color: #ff6b3d;
+        }
+
+        @media (max-width: 768px) {
+            .signup-container {
+                flex-direction: column;
+                margin: 20px;
+            }
+
+            .image-section {
+                min-height: 200px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
         }
     </style>
 </head>
-
 <body>
-    <header class="header">
-    </header>
-
-    <main class="main-content container">
-        <div class="product-grid" id="product-grid">
-            <!-- Products will be loaded here -->
+    <div class="signup-container">
+        <button class="close-button">×</button>
+        <div class="image-section"></div>
+        <div class="form-section">
+            <h1 class="form-title">Sign Up</h1>
+            <form>
+                <div class="form-group">
+                    <label for="firstname">First name</label>
+                    <input type="text" id="firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last name</label>
+                    <input type="text" id="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="code-conduct" required>
+                    <label for="code-conduct">I agree to the code of conduct</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="join-community">
+                    <label for="join-community">Join the community</label>
+                </div>
+                <button type="submit" class="register-button">Register</button>
+            </form>
         </div>
-    </main>
-
-    <aside class="cart-sidebar" id="cart-sidebar">
-        <h2>Your Cart</h2>
-        <button class="close-btn" id="close-cart">&times;</button>
-        <div id="cart-items-container">
-            <!-- Cart items will be loaded here -->
-        </div>
-        <button class="checkout-btn" id="checkout-btn">Checkout</button>
-    </aside>
-
-    <script>
-        const products = [
-            { id: 1, name: 'DSA Using Python', price: 279.99, duration: '4 weeks', image: 'https://courses.wscubetech.com/s/store/courses/612c9e860cf2b183bad3c610/cover.jpg?v=5' },
-            { id: 2, name: 'React js with Projects', price: 49.99, duration: '6 weeks', image: 'https://admin.mridul.tech/wp-content/uploads/2023/02/React-Project-Ideas.jpg' },
-            { id: 3, name: 'Front End - HTML, CSS, JS', price: 39.99, duration: '5 weeks', image: 'https://cdn.kwork.com/pics/t3/55/32195796-6622c7ff2f0c2.jpg' },
-            { id: 4, name: 'Backend Python Django', price: 499.99, duration: '8 weeks', image: 'https://blueshelltech.com/media/2021/05/python-django-1024x576.jpg' },
-            { id: 5, name: 'Python Basics', price: 24.99, duration: '2 weeks', image: 'https://i.ytimg.com/vi/fLAfa-BQtOQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCijxDCPY54AmRDRCND6DK71Gm58Q' },
-            { id: 6, name: 'Full Stack Development', price: 14.99, duration: '10 weeks', image: 'https://jaro-website.s3.ap-south-1.amazonaws.com/2024/04/0-cl7fc6pt1MHjIF4K.png' },
-            { id: 7, name: 'Advanced Data Analytics', price: 14.99, duration: '12 weeks', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj-h4tm2Vva7TjrEZkYAPAQD1drOjSfkwzbA&s' },
-            { id: 8, name: 'Data Science Fundamentals', price: 14.99, duration: '8 weeks', image: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_Data_Science.jpg' },
-        ];
-
-        const cart = [];
-        const productGrid = document.getElementById('product-grid');
-        const cartItemsContainer = document.getElementById('cart-items-container');
-        const cartSidebar = document.getElementById('cart-sidebar');
-        const closeCartButton = document.getElementById('close-cart');
-        const checkoutButton = document.getElementById('checkout-btn');
-
-        function renderProducts() {
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.classList.add('product-card');
-                productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="info">
-                        <h3>${product.name}</h3>
-                        <p>Duration: ${product.duration}</p>
-                        <div class="details">
-                            <span>Price: $${product.price}</span>
-                        </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
-                    </div>
-                `;
-                productGrid.appendChild(productCard);
-            });
-        }
-
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (product) cart.push(product);
-            renderCartItems();
-        }
-
-        function renderCartItems() {
-            cartItemsContainer.innerHTML = '';
-            cart.forEach(item => {
-                const cartItem = document.createElement('div');
-                cartItem.classList.add('cart-item');
-                cartItem.innerHTML = `
-                    <div class="cart-item-inner">
-                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                        <div class="item-info">
-                            <h3>${item.name}</h3>
-                            <p class="price">$${item.price}</p>
-                        </div>
-                    </div>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-            });
-        }
-
-        function toggleCart() {
-            cartSidebar.classList.toggle('open');
-        }
-
-        closeCartButton.addEventListener('click', toggleCart);
-        checkoutButton.addEventListener('click', () => alert('Proceeding to Checkout'));
-
-        renderProducts();
-    </script>
+    </div>
 </body>
-
 </html>
