@@ -3,71 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Solutions</title>
+    <title>DSA Using Python - Course Details</title>
     <style>
-        body, html {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            height: 100%;
         }
+
         .container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header, footer {
-            background-color: #1e2b6b;
-            height: 60px;
-        }
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
         }
-        h1 {
-            color: #1e2b6b;
-            font-family: Georgia, serif;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
+
+        .header-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url('/placeholder.svg?height=400&width=1200');
+            background-size: cover;
+            background-position: center;
+            position: relative;
         }
-        p {
-            text-align: center;
-            line-height: 1.6;
-            margin-bottom: 2rem;
+
+        .course-card {
+            background: white;
+            padding: 30px;
+            max-width: 400px;
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .button {
-            background-color: black;
+
+        .course-card h1 {
+            color: #1a237e;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .course-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .enroll-button {
+            background-color: #d32f2f;
             color: white;
-            padding: 10px 20px;
+            padding: 12px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-link {
+            color: #1a237e;
             text-decoration: none;
             display: inline-block;
-            margin-bottom: 1rem;
+            margin: 20px 0;
         }
-        .back-link {
-            color: #1e2b6b;
-            text-decoration: none;
+
+        .section-title {
+            color: #1a237e;
+            font-size: 24px;
+            margin: 40px 0 20px;
         }
-        .back-link:hover {
-            text-decoration: underline;
+
+        .course-description {
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .instructor-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .instructor-info {
+            flex: 1;
+        }
+
+        .instructor-name {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .instructor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .course-card {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin: -100px auto 0;
+            }
+
+            .instructor-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="header-image">
+        <div class="container">
+            <div class="course-card">
+                <h1>DSA Using Python</h1>
+                <div class="course-details">
+                    <div>
+                        <div class="detail-label">Price</div>
+                        <div>4000</div>
+                    </div>
+                    <div>
+                        <div class="detail-label">Duration</div>
+                        <div>8 weeks</div>
+                    </div>
+                </div>
+                <button class="enroll-button">Enroll</button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <header></header>
-        <main>
-            <h1>Cloud<br>Solutions</h1>
-            <p>At MasterSolis InfoTech, we understand the importance of reliable and secure cloud computing. That's why we offer a wide range of cloud-based solutions to meet all your business needs. Our team of experienced professionals will work closely with you to ensure you get the right solution for your needs. Contact us today to learn more about our cloud computing services and how we can help your business thrive in the cloud.</p>
-            <a href="#" class="button">Join Us</a>
-            <a href="#" class="back-link">← Back</a>
-        </main>
-        <footer></footer>
+        <a href="#" class="back-link">← Back</a>
+
+        <h2 class="section-title">About the Course</h2>
+        <p class="course-description">
+            Python is one of the most in-demand programming languages in the world, and MasterSolis InfoTech is proud to offer a comprehensive course to help you master this versatile platform. Our Python course covers all the essentials, from basic syntax to advanced data analysis and machine learning. With personalized guidance and hands-on exercises, you'll learn from the best and become proficient in a variety of Python applications. Don't let your IT career fall behind in this rapidly evolving field. Enroll in our Python course today and prepare yourself for success.
+        </p>
+
+        <h2 class="section-title">Your Instructor</h2>
+        <div class="instructor-section">
+            <div class="instructor-info">
+                <h3 class="instructor-name">Praveen</h3>
+                <p class="course-description">
+                    Experienced Python instructor with expertise in Data Structures and Algorithms.
+                </p>
+            </div>
+            <img src="/placeholder.svg?height=150&width=150" alt="Instructor Praveen" class="instructor-image">
+        </div>
     </div>
 </body>
 </html>
